@@ -47,7 +47,7 @@ export const createLink = async (req, res) => {
                 authorId: authorId || null,
             }
         })
-        res.end()
+        res.sendStatus(200)
     }
     catch (err) {
         console.log(err)

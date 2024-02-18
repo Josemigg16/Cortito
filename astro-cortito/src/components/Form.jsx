@@ -7,7 +7,7 @@ const Form = () => {
     const [shortcut, setShortcut] = useState("")
     const [bluring, setBluring] = useState(true)
     const [error, setError] = useState(false)
-
+    
     const handleSubmit = async (e) => {
         e.preventDefault()
         if(shortcut.length === 0) return setError(true)
