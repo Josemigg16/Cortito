@@ -14,7 +14,7 @@ const Form = () => {
         const newLink = await createShortcut(shortcut)
         setError(false)
         updateShortcut(newLink)
-        window.location.href = window.location.href + '/success'
+        window.location.href = window.location.href + 'success'
         setShortcut("")
     }
     useEffect(() => {
