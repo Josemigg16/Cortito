@@ -47,7 +47,7 @@ export const createLink = async (req, res) => {
                 authorId: authorId || null,
             }
         })
-        res.sendStatus(200)
+        res.status(200).send("shorcut created successfully")
     }
     catch (err) {
         console.log(err)
