@@ -7,7 +7,7 @@ import authRoutes from './routes/auth.routes.js'
 const app = express()
 
 app.use(cors({
-    origin: "http://localhost:4321",
+    origin: process.env.FRONTEND_URL,
 }))
 app.use(morgan('dev'))
 app.use(express.json())

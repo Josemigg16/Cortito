@@ -4,6 +4,7 @@ import { useStore } from "@nanostores/react"
 const ShowState = () => {
 
     const state = useStore($shortcut)
+    console.log($shortcut.value)
     const shortcut = `${window.location.origin}/${state}`
 
     return (
