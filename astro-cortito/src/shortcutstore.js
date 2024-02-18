@@ -1,14 +1,16 @@
 import { atom } from "nanostores"
 export const $shortcut = atom("")
 if (typeof window !== "undefined") {
-    const state = JSON.parse(window.localStorage.getItem("shortcut"))
-    if (state) {
+    try {
+        const state = JSON.parse(window.localStorage.getItem("shortcut"))
         $shortcut.set(state.shortcut)
+    } catch {
+        $shortcut.set("")
     }
 }
 
 export const updateShortcut = (newState) => {
-    window.localStorage.setItem("shortcut", JSON.stringify({shortcut: newState}));
+    window.localStorage.setItem("shortcut", JSON.stringify({ shortcut: newState }));
     $shortcut.set(newState)
     console.log($shortcut.value)
 }
