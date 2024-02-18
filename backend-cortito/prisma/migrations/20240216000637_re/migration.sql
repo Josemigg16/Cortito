@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "Post" ALTER COLUMN "oldLink" DROP NOT NULL,
+ALTER COLUMN "newLink" DROP NOT NULL;

@@ -1,0 +1,10 @@
+---
+import getShortcuts from "../helpers/getShortcuts.js";
+
+const pages = await getShortcuts();
+const { slug } = Astro.params;
+const page = pages.find((page: { newLink: string }) => page.newLink === slug);
+
+if(page !== undefined) return Astro.redirect(`${page.oldLink}`);
+if (!page) return Astro.redirect("/404");
+---

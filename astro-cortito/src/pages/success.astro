@@ -1,0 +1,24 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ShowShortcutState from "../components/ShowState.jsx";
+import { lazy } from "react";
+---
+
+<Layout title="Shortcut created!">
+  <main>
+    <article
+      class="h-[30rem] flex flex-col justify-between border-2 border-gray-500
+rounded-md p-14 pb-8 items-center"
+    >
+      <h1
+        class="uppercase text-5xl font-bold text-center md:w-[15ch] w-[9ch] cursor-pointer
+	  hover:text-gray-400"
+      >
+        Shortcut created!
+      </h1>
+      <section class="w-full h-full flex items-center">
+        <ShowShortcutState client:only="react" />
+      </section>
+    </article>
+  </main>
+</Layout>

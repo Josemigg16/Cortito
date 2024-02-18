@@ -1,0 +1,45 @@
+---
+import { SignIn, SignOut } from "auth-astro/components";
+import { getSession } from "auth-astro/server";
+import Layout from "@/layouts/Layout.astro";
+import Form from "@/components/Form";
+import SignInWith from "@/components/SignInWith.astro";
+import google from "public/svg/google.svg";
+import github from "public/svg/github.svg";
+
+const session = await getSession(Astro.request);
+---
+
+<Layout title="Create your first shortcut">
+  <main>
+    {
+      session ? (
+        <>
+          <h1>Iniciado</h1>
+          <SignOut>Sign Out</SignOut>
+        </>
+      ) : (
+        <article
+          class="h-[30rem] flex flex-col justify-between border-2 border-gray-500
+	rounded-md p-14 pb-8 items-center"
+        >
+          <label
+            class="uppercase text-5xl font-bold text-center md:w-[15ch] w-[9ch] cursor-pointer
+	  hover:text-gray-400"
+            for="input"
+          >
+            Create your first shortcut
+          </label>
+          <section class="flex flex-col justify-end h-full" />
+          <Form client:load />
+          <SignInWith image={google.src}>
+            <SignIn provider="google">Sign in with Google</SignIn>
+          </SignInWith>
+          <SignInWith image={github.src}>
+            <SignIn provider="github">Sign in with Github</SignIn>
+          </SignInWith>
+        </article>
+      )
+    }
+  </main>
+</Layout>

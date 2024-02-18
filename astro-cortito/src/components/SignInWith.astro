@@ -1,0 +1,10 @@
+---
+const { image } = Astro.props;
+---
+
+<a
+  class="text-1xl hover:text-gray-100 flex justify-center pl-6 mb-2 items-center hover:bg-gray-600 cursor-pointer bg-gray-700 rounded-3xl px-4 w-80 min-h-12 relative"
+>
+  <img class="absolute left-6 w-6 h-6" src={image} />
+  <slot />
+</a>
