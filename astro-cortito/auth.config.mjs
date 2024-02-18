@@ -1,5 +1,5 @@
 import { defineConfig } from "astro/config"
-import Google from "@auth/core/providers/Google"
+import Google from "@auth/core/providers/google"
 import GitHub from "@auth/core/providers/github"
 
 export default defineConfig({
