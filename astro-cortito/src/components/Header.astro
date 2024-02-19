@@ -1,0 +1,44 @@
+---
+import { Image } from "astro:assets";
+---
+
+<header
+  class="bg-slate-700 top-0 z-50 lg:flex items-center justify-between lg:px-20"
+>
+  <a href="/" class="flex justify-between items-center px-8 py-4 outline-none">
+    <Image
+      class="w-20 cursor-pointer ml-8 lg:ml-0"
+      src={"/cortito.png"}
+      alt="Oikos logo"
+      width={200}
+      height={200}
+    />
+    <div class="lg:hidden">
+      <i
+        class="fa-solid fa-bars text-5xl text-slate-200 transition-transform duration-300 cursor-pointer"
+      ></i>
+    </div>
+  </a>
+  <nav
+    class="overflow-hidden h-0 transition-[height] duration-300 lg:h-full uppercase"
+  >
+    <ul
+      class="text-white font-bold text-center text-lg w-10/12 mx-auto lg:flex lg:mr-16 hidden" 
+    >
+      <a tabindex="0" class="hover:bg-gray-800 focus-visible:bg-gray-800 rounded-sm cursor-pointer block p-6 outline-none">Cursos</a>
+
+      <a tabindex="0" class="hover:bg-gray-800 focus-visible:bg-gray-800 rounded-sm cursor-pointer block p-6 outline-none">Ubícanos</a>
+
+      <a tabindex="0" class="hover:bg-gray-800 focus-visible:bg-gray-800 rounded-sm cursor-pointer block p-6 outline-none">Contáctanos</a>
+    </ul>
+  </nav>
+</header>
+<script>
+  const $nav = document.querySelector("nav") as HTMLElement;
+  const $faBars = document.querySelector(".fa-bars") as HTMLElement;
+  $faBars.addEventListener("click", () => {
+    $faBars.classList.toggle("-rotate-90");
+    $nav?.firstElementChild?.classList.toggle("hidden");
+    $nav?.classList.toggle("h-60");
+  });
+</script>
