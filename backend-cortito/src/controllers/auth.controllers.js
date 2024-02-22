@@ -106,7 +106,7 @@ export const createLink = async (req, res) => {
     if (oldLink === "") return
     try {
         if (authorEmail) {
-
+            console.log('hello')
             const link = await prisma.post.create({
                 data: {
                     oldLink: fixURL(oldLink),
@@ -121,6 +121,7 @@ export const createLink = async (req, res) => {
                 }
             })
         } else {
+            console.log('hello 2')
             const link = await prisma.post.create({
                 data: {
                     oldLink: fixURL(oldLink),
