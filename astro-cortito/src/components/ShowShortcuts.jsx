@@ -31,8 +31,8 @@ const ShowShortcuts = ({ session }) => {
 
   return (
     <article>
-      <header className='w-full flex justify-between items-center'>
-        <h1 className='text-5xl h-full uppercase font-bold'
+      <header className='w-full md:flex md:justify-between md:items-center'>
+        <h1 className='text-5xl h-full uppercase font-bold text-nowrap mb-16 mt-5'
         >Your Shortcuts</h1>
         <ToggleView view={view} setView={setView} />
       </header>
@@ -45,7 +45,7 @@ const ShowShortcuts = ({ session }) => {
           }
         </section>)
         : (
-          <section className='mt-6 rounded overflow-hidden'>
+          <section className='mt-6 rounded overflow-hidden min-w-[1360px]'>
             <ShortcutsListHeader />
             {
               shortcuts?.map((shortcut) => (

@@ -18,7 +18,7 @@ const Card = ({ shortcut }) => {
 
     return (
         <article id="item"
-            className='bg-gray-800 min-h-64 h-56 flex flex-col justify-between mt-6 rounded-md overflow-hidden relative'>
+            className='bg-gray-800 min-h-64 h-56 flex flex-col justify-between mt-6 rounded-md overflow-hidden relative min-w-[380px] w-[410px] mx-auto'>
             <header className="bg-gray-700 p-4">
                 <input
                     value={title}

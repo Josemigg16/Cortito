@@ -36,15 +36,15 @@ const SessionButtons = ({ session }) => {
         <div>
             {
                 !session ? (
-                    <div className="scale-100">
+                    <div className="md:scale-100 scale-90">
 
-                        <div className="text-1xl hover:text-gray-100 flex justify-center pl-6 mb-2 items-center hover:bg-gray-600 cursor-pointer bg-gray-700 rounded-3xl px-4 w-80 min-h-12 relative"
+                        <div className="hover:text-gray-100 flex justify-center pl-6 mb-2 items-center hover:bg-gray-600 cursor-pointer bg-gray-700 rounded-3xl px-4 w-80 min-h-12 relative"
                             onClick={handleGoogle}>
                             Sign in with Google
                             <img className="absolute left-6 w-6 h-6" src={google.src} alt="google" />
                         </div>
 
-                        <div className="text-1xl hover:text-gray-100 flex justify-center pl-6 mb-2 items-center hover:bg-gray-600 cursor-pointer bg-gray-700 rounded-3xl px-4 w-80 min-h-12 relative"
+                        <div className="hover:text-gray-100 flex justify-center pl-6 mb-2 items-center hover:bg-gray-600 cursor-pointer bg-gray-700 rounded-3xl px-4 w-80 min-h-12 relative"
                             onClick={handleGithub}>
                             Sign in with Github
                             <img className="absolute left-6 w-6 h-6" src={github.src} alt="github" />

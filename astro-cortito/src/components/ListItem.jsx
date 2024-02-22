@@ -14,7 +14,6 @@ const ListItem = ({ shortcut }) => {
         handleCopied
     } = useShortcutItem(shortcut)
 
-
     return (
         <form onSubmit={handleEdit} id="item" tabIndex="-1"
             className='grid-cols-4 grid-rows-1 bg-gray-800 m-1 relative h-14 
@@ -44,7 +43,7 @@ const ListItem = ({ shortcut }) => {
                 <div type="button"
                     onClick={handleCopied}
                     className="bg-gray-800 p-1 px-2.5 border-2 hidden cursor-pointer">
-                    <i class="fa-regular fa-copy"></i>
+                    <i className="fa-regular fa-copy"></i>
                 </div>
                 <div type="button" id={`trash:${shortcut.newLink}`}
                     onClick={async () => await deleteShortcut({ id: shortcut.id })}
