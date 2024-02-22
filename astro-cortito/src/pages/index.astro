@@ -1,15 +1,9 @@
 ---
-import { SignIn, SignOut } from "auth-astro/components";
 import { getSession } from "auth-astro/server";
-import { updateSession } from "@/sessionstore.js";
 import Layout from "@/layouts/Layout.astro";
 import Form from "@/components/Form";
-import SignInWith from "@/components/SignInWith.astro";
-import google from "public/svg/google.svg";
-import github from "public/svg/github.svg";
-
+import SessionButtons from "@/components/SessionButtons";
 const session = await getSession(Astro.request);
-updateSession(session);
 ---
 
 <Layout title="Create your first shortcut">
@@ -28,22 +22,7 @@ updateSession(session);
       <section class="h-full flex flex-col justify-end scale-120">
         <Form client:load session={session} />
 
-        {
-          !session ? (
-            <div class="scale-100">
-              <SignInWith image={google.src}>
-                <SignIn provider="google">Sign in with Google</SignIn>
-              </SignInWith>
-              <SignInWith image={github.src}>
-                <SignIn provider="github">Sign in with Google</SignIn>
-              </SignInWith>
-            </div>
-          ) : (
-            <SignInWith>
-              <SignOut>Logout</SignOut>
-            </SignInWith>
-          )
-        }
+        <SessionButtons client:load session={session} />
       </section>
       <a
         href="/shortcuts"

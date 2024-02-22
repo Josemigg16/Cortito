@@ -9,9 +9,6 @@ export default async function register({ name, email, posts }) {
                 name, email, posts
             })
         })
-        const response = await fetch(`${import.meta.env.PUBLIC_API_URL}/users/${email}`)
-        const user = await response.json()
-        return user
     } catch (error) {
         console.log(error)
     }

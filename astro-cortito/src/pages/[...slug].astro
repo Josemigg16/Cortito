@@ -1,10 +1,12 @@
 ---
 import getOneShortcut from "../libs/getOneShortcut.js";
+import fixUrl from "@/helpers/fixUrl.js";
 
 const { slug } = Astro.params;
 
 const page = await getOneShortcut(slug);
+const newUrl = fixUrl(page.oldLink)
 
-if (page) return Astro.redirect(`${page.oldLink}`);
+if (page) return Astro.redirect(`${newUrl}`);
 if (!page) return Astro.redirect("/404");
 ---

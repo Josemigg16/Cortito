@@ -31,16 +31,10 @@ export const deleteStateShortcut = ({ id }) => {
 }
 
 export const checkState = () => {
-    console.log($shortcut.get())
+    return $shortcut.get()
 }
 
 export const clearState = () => {
-    const state = $shortcut.get()
-    const clearedState = state.filter(shortcut => {
-        if (shortcut.authorId) return
-        return shortcut
-    })
-    window.localStorage.setItem("shortcuts", JSON.stringify(clearedState));
-    $shortcut.set(clearedState)
-    console.log($shortcut.get())
+    $shortcut.set([])
+    window.localStorage.removeItem("shortcuts")
 }

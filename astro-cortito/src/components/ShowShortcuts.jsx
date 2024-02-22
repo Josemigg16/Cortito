@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useStore } from "@nanostores/react"
 import { $shortcut, clearState } from "../shortcutstore.js"
-import register from "@/libs/register";
+import getOneUser from "@/libs/getOneUser.js";
 import ToggleView from './ToggleView.jsx'
 import Card from "./Card.jsx"
 import ListItem from "./ListItem.jsx"
@@ -13,20 +13,15 @@ const ShowShortcuts = ({ session }) => {
   const [shortcuts, setShortcuts] = useState([])
   const [view, setView] = useState('grid')
   const state = useStore($shortcut)
-  console.log(state)
-  const getUser = async () => {
-    if (session) {
-      const user = await register({
-        name: session.user?.name,
-        email: session.user?.email,
-        posts: state,
-      })
-      $shortcut.set(user.posts)
-    } else {
-      clearState()
-    }
-  }
+
+
   useEffect(() => {
+    const getUser = async () => {
+      if (session) {
+        const user = await getOneUser({ email: session.user.email })
+        $shortcut.set(user.posts)
+      }
+    }
     getUser()
   }, [])
 

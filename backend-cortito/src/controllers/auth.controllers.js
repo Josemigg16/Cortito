@@ -1,10 +1,9 @@
 import prisma from "../db.js"
-import { fixURL } from "../helpers/fixUrl.js"
-import { generateRandomNumber } from "../helpers/randomNumber.js"
 
 export const register = async (req, res) => {
 
     const { email, name, posts } = req.body
+    console.log(posts)
 
     try {
 
@@ -21,10 +20,8 @@ export const register = async (req, res) => {
             if (posts) addPosts({ authorId: isDuplicated.id, posts })
             return res.sendStatus(200)
         }
-        const fixedPosts = posts && posts.map(post => ({ ...post, oldLink: fixURL(post.oldLink) }))
         const user = await prisma.user.create({
             data: {
-                id: generateRandomNumber(),
                 email,
                 name,
                 posts: {
@@ -110,8 +107,7 @@ export const createLink = async (req, res) => {
         if (authorEmail) {
             const link = await prisma.post.create({
                 data: {
-                    id: generateRandomNumber(),
-                    oldLink: fixURL(oldLink),
+                    oldLink: oldLink,
                     newLink,
                     title: title || null,
                     author: {
@@ -125,8 +121,7 @@ export const createLink = async (req, res) => {
         } else {
             const link = await prisma.post.create({
                 data: {
-                    id: generateRandomNumber(),
-                    oldLink: fixURL(oldLink),
+                    oldLink: oldLink,
                     newLink,
                     title: title || null,
                     description: description || null
@@ -229,7 +224,7 @@ export const editShortcut = async (req, res) => {
             data: {
                 title: req.body.title,
                 description: req.body.description,
-                oldLink: fixURL(req.body.oldLink),
+                oldLink: req.body.oldLink,
             }
         })
         console.log(shortcut)
