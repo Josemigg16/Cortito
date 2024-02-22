@@ -1,6 +1,6 @@
 -- CreateTable
 CREATE TABLE "User" (
-    "id" TEXT NOT NULL,
+    "id" UUID NOT NULL,
     "name" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -10,7 +10,7 @@ CREATE TABLE "User" (
 
 -- CreateTable
 CREATE TABLE "Post" (
-    "id" TEXT NOT NULL,
+    "id" UUID NOT NULL,
     "title" TEXT,
     "oldLink" TEXT NOT NULL,
     "newLink" TEXT NOT NULL,
