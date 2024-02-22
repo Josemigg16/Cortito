@@ -1,5 +1,6 @@
 import prisma from "../db.js"
 import { fixURL } from "../helpers/fixUrl.js"
+import { randomNumber } from "../helpers/randomNumber.js"
 
 export const register = async (req, res) => {
 
@@ -23,6 +24,7 @@ export const register = async (req, res) => {
         const fixedPosts = posts && posts.map(post => ({ ...post, oldLink: fixURL(post.oldLink) }))
         const user = await prisma.user.create({
             data: {
+                id: randomNumber(),
                 email,
                 name,
                 posts: {
@@ -108,6 +110,7 @@ export const createLink = async (req, res) => {
         if (authorEmail) {
             const link = await prisma.post.create({
                 data: {
+                    id: randomNumber(),
                     oldLink: fixURL(oldLink),
                     newLink,
                     title: title || null,
@@ -122,6 +125,7 @@ export const createLink = async (req, res) => {
         } else {
             const link = await prisma.post.create({
                 data: {
+                    id: randomNumber(),
                     oldLink: fixURL(oldLink),
                     newLink,
                     title: title || null,
