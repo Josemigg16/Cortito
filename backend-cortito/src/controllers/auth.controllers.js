@@ -23,6 +23,7 @@ export const register = async (req, res) => {
         const fixedPosts = posts && posts.map(post => ({ ...post, oldLink: fixURL(post.oldLink) }))
         const user = await prisma.user.create({
             data: {
+                id: crypto.randomUUID(),
                 email,
                 name,
                 posts: {
@@ -106,9 +107,9 @@ export const createLink = async (req, res) => {
     if (oldLink === "") return
     try {
         if (authorEmail) {
-            console.log('hello')
             const link = await prisma.post.create({
                 data: {
+                    id: crypto.randomUUID(),
                     oldLink: fixURL(oldLink),
                     newLink,
                     title: title || null,
@@ -121,9 +122,9 @@ export const createLink = async (req, res) => {
                 }
             })
         } else {
-            console.log('hello 2')
             const link = await prisma.post.create({
                 data: {
+                    id: crypto.randomUUID(),
                     oldLink: fixURL(oldLink),
                     newLink,
                     title: title || null,
