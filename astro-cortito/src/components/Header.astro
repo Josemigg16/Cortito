@@ -3,15 +3,16 @@ import { Image } from "astro:assets";
 ---
 
 <header
-  class="bg-slate-700 top-0 z-50 lg:flex items-center justify-between lg:px-20"
+  class="bg-[#cf502a] slate-900 top-0 z-50 lg:flex items-center justify-between lg:px-20"
 >
   <a href="/" class="flex justify-between items-center px-8 py-4 outline-none">
     <Image
-      class="w-20 cursor-pointer ml-8 lg:ml-0"
+      class="w-20 cursor-pointer ml-8 lg:ml-0 rounded-full"
       src={"/cortito.png"}
       alt="Oikos logo"
       width={200}
       height={200}
+      loading="eager"
     />
     <div class="lg:hidden">
       <i

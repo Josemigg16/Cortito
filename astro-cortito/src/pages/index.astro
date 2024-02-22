@@ -1,45 +1,60 @@
 ---
 import { SignIn, SignOut } from "auth-astro/components";
 import { getSession } from "auth-astro/server";
+import { updateSession } from "@/sessionstore.js";
 import Layout from "@/layouts/Layout.astro";
 import Form from "@/components/Form";
+import SessionComponent from "@/components/SessionComponent";
 import SignInWith from "@/components/SignInWith.astro";
 import google from "public/svg/google.svg";
 import github from "public/svg/github.svg";
 
 const session = await getSession(Astro.request);
+updateSession(session);
 ---
 
 <Layout title="Create your first shortcut">
   <main>
-    {
-      session ? (
-        <>
-          <h1>Iniciado</h1>
-          <SignOut>Sign Out</SignOut>
-        </>
-      ) : (
-        <article
-          class="h-[30rem] flex flex-col justify-between border-2 border-gray-500
-	rounded-md p-14 pb-8 items-center"
-        >
-          <label
-            class="uppercase text-5xl font-bold text-center md:w-[15ch] w-[9ch] cursor-pointer
+    <article
+      class="h-[30rem] flex flex-col justify-between border-2 border-gray-500
+	rounded-md p-14 pb-8 items-center relative"
+    >
+      <label
+        class="uppercase text-5xl font-bold text-center md:w-[15ch] w-[9ch] cursor-pointer
 	  hover:text-gray-400"
-            for="input"
-          >
-            Create your first shortcut
-          </label>
-          <section class="flex flex-col justify-end h-full" />
-          <Form client:load />
-          <SignInWith image={google.src}>
-            <SignIn provider="google">Sign in with Google</SignIn>
-          </SignInWith>
-          <SignInWith image={github.src}>
-            <SignIn provider="github">Sign in with Github</SignIn>
-          </SignInWith>
-        </article>
-      )
-    }
+        for="input"
+      >
+        Create your first shortcut
+      </label>
+      <section class="h-full flex flex-col justify-end scale-120">
+        <Form session={session} client:load />
+
+        {
+          !session ? (
+            <div class="scale-100">
+              <SignInWith image={google.src}>
+                <SignIn provider="google">Sign in with Google</SignIn>
+              </SignInWith>
+              <SignInWith image={github.src}>
+                <SignIn provider="github">Sign in with Google</SignIn>
+              </SignInWith>
+            </div>
+          ) : (
+            <SignInWith>
+              <SignOut>Logout</SignOut>
+            </SignInWith>
+          )
+        }
+      </section>
+      <a
+        href="/shortcuts"
+        class="bg-gray-700 absolute -bottom-24 w-full text-center rounded py-3 hover:outline"
+      >
+        Go to Your Shortcuts
+        <i
+          class="fa-solid fa-arrow-right absolute top-3.25 right-[8rem] text-4xl"
+        ></i>
+      </a>
+    </article>
   </main>
 </Layout>

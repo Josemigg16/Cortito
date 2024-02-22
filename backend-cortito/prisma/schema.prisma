@@ -11,28 +11,20 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
+  id        String   @id @default(uuid())
   name      String
   email     String   @unique
   posts     Post[]
   createdAt DateTime @default(now())
 }
 
-model NoUser {
-  id        Int      @id @default(autoincrement())
-  posts     Post[]
-  createdAt DateTime @default(now())
-}
-
 model Post {
-  id          Int      @id @default(autoincrement())
+  id          String   @id @default(uuid())
   title       String?
   oldLink     String
   newLink     String
   description String?
   createdAt   DateTime @default(now())
-  authorId    Int?
+  authorId    String?
   author      User?    @relation(fields: [authorId], references: [id])
-  NoUser      NoUser?  @relation(fields: [noUserId], references: [id])
-  noUserId    Int?
 }

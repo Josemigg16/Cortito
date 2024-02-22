@@ -1,13 +1,15 @@
 ---
+import { getSession } from "auth-astro/server";
 import Layout from "@/layouts/Layout.astro";
 import Header from "@/components/Header.astro";
+import ShowShortcuts from "@/components/ShowShortcuts.jsx";
 
+const session = await getSession(Astro.request);
 ---
 
 <Layout title="Shortcuts">
   <Header />
-  <main class="block w-auto">
-
+  <main class="block w-auto h-fit">
+    <ShowShortcuts session={session} client:only />
   </main>
 </Layout>
-<style></style>
