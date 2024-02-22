@@ -1,5 +1,4 @@
 import useShortcutItem from "@/hooks/useShortcutItem"
-import makeURL from "@/helpers/makeURL"
 import handleKeyDown from "@/helpers/handleKeyDown"
 
 const Card = ({ shortcut }) => {
@@ -14,7 +13,6 @@ const Card = ({ shortcut }) => {
         handleEdit,
         makeURL,
         deleteShortcut,
-        RowInput,
         handleCopied
     } = useShortcutItem(shortcut)
 

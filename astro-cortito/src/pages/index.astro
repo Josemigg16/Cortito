@@ -26,7 +26,7 @@ updateSession(session);
         Create your first shortcut
       </label>
       <section class="h-full flex flex-col justify-end scale-120">
-        <Form session={session} client:load />
+        <Form client:load session={session} />
 
         {
           !session ? (

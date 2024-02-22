@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useStore } from "@nanostores/react"
-import { $shortcut, checkState, clearState } from "../shortcutstore.js"
+import { $shortcut, clearState } from "../shortcutstore.js"
 import register from "@/libs/register";
 import ToggleView from './ToggleView.jsx'
 import Card from "./Card.jsx"
