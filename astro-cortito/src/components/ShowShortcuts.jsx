@@ -32,12 +32,12 @@ const ShowShortcuts = ({ session }) => {
   return (
     <article>
       <header className='w-full md:flex md:justify-between md:items-center'>
-        <h1 className='text-5xl h-full uppercase font-bold text-nowrap mb-16 mt-5'
+        <h1 className='text-[2.75rem] md:text-5xl h-full uppercase font-bold text-nowrap -ml-3.5 md:ml-0 mb-16 mt-5 md:mb-5'
         >Your Shortcuts</h1>
         <ToggleView view={view} setView={setView} />
       </header>
       {view === 'grid' ?
-        (<section className='grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6'>
+        (<section className='grid 2xl:grid-cols-4 xl:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6'>
           {
             shortcuts?.map((shortcut) => (
               <Card key={crypto.randomUUID()} shortcut={shortcut} />
