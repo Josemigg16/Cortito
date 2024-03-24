@@ -1,1 +1,0 @@
-FIX URL: verificar si tiene protocolo http o https, si no lo tiene, colocarlo
