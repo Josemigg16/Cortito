@@ -1,0 +1,48 @@
+---
+import { Image } from "astro:assets";
+import LogoutShortcuts from "./LogoutShortcuts";
+import { getSession } from "auth-astro/server";
+
+const session = await getSession(Astro.request);
+---
+
+<header
+  class="bg-slate-800 top-0 z-50 lg:flex items-center justify-between lg:px-20 relative min-w-[430px]"
+>
+  <a
+    href="/"
+    class="flex justify-between items-center lg:pl-4 py-2 outline-none w-32"
+  >
+    <Image
+      class="w-20 cursor-pointer ml-8 lg:ml-0 rounded-full"
+      src={"/cortito.png"}
+      alt="Oikos logo"
+      width={200}
+      height={200}
+      loading="eager"
+    />
+  </a>
+  <div class="lg:hidden absolute top-7 right-5 cursor-pointer">
+    <i
+      class="fa-solid fa-bars text-5xl text-slate-200 transition-transform duration-300"
+    ></i>
+  </div>
+  <nav
+    class="overflow-hidden h-0 transition-[height] duration-300 lg:h-full uppercase"
+  >
+    <ul
+      class="text-white font-bold text-center text-lg w-10/12 mx-auto lg:flex lg:mr-16 hidden"
+    >
+      {session && <LogoutShortcuts client:load />}
+    </ul>
+  </nav>
+</header>
+<script>
+  const $nav = document.querySelector("nav") as HTMLElement;
+  const $faBars = document.querySelector(".fa-bars") as HTMLElement;
+  $faBars.addEventListener("click", () => {
+    $faBars.classList.toggle("-rotate-90");
+    $nav?.firstElementChild?.classList.toggle("hidden");
+    $nav?.classList.toggle("h-24");
+  });
+</script>
