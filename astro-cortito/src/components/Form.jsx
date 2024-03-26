@@ -13,10 +13,12 @@ const Form = ({ session }) => {
         if (oldLink.length === 0) return setError(true)
         const waiting = await createShortcut({ oldLink, authorEmail: session && session.user?.email })
         if (typeof waiting !== String) return setWaitingMsg(true)
-        setWaitingMsg(false)
-        window.location.pathname = '/success'
-        setError(false)
-        setOldLink("")
+        else {
+            setWaitingMsg(false)
+            window.location.pathname = '/success'
+            setError(false)
+            setOldLink("")
+        }
     }
 
     useEffect(() => {
