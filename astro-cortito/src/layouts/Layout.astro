@@ -21,12 +21,17 @@ const { title } = Astro.props;
   <script
     src="https://kit.fontawesome.com/9464c2d09c.js"
     crossorigin="anonymous"></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/2.3.0/alpine-ie11.js"
+    integrity="sha512-6m6AtgVSg7JzStQBuIpqoVuGPVSAK5Sp/ti6ySu6AjRDa1pX8mIl1TwP9QmKXU+4Mhq/73SzOk6mbNvyj9MPzQ=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"></script>
 </html>
 <style is:global>
   :root {
   }
   html {
-    background: #13151a;
+    background: #000719;
   }
   main {
     margin: auto;
@@ -39,6 +44,24 @@ const { title } = Astro.props;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 99.9vh;
+  }
+  .description {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  #item:hover div div {
+    display: inline;
+  }
+  #item:focus div div {
+    display: inline;
+  }
+  @media (max-width: 767px) {
+    #item div div {
+      display: inline;
+    }
   }
 </style>

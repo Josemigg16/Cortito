@@ -1,45 +1,38 @@
 ---
-import { SignIn, SignOut } from "auth-astro/components";
 import { getSession } from "auth-astro/server";
 import Layout from "@/layouts/Layout.astro";
 import Form from "@/components/Form";
-import SignInWith from "@/components/SignInWith.astro";
-import google from "public/svg/google.svg";
-import github from "public/svg/github.svg";
-
+import SessionButtons from "@/components/SessionButtons";
 const session = await getSession(Astro.request);
 ---
 
 <Layout title="Create your first shortcut">
   <main>
-    {
-      session ? (
-        <>
-          <h1>Iniciado</h1>
-          <SignOut>Sign Out</SignOut>
-        </>
-      ) : (
-        <article
-          class="h-[30rem] flex flex-col justify-between border-2 border-gray-500
-	rounded-md p-14 pb-8 items-center"
-        >
-          <label
-            class="uppercase text-5xl font-bold text-center md:w-[15ch] w-[9ch] cursor-pointer
+    <article
+      class="h-[30rem] flex flex-col justify-between border-2 border-gray-500
+	rounded-md px-4 pt-20 md:p-14 pb-8 items-center relative"
+    >
+      <label
+        class="uppercase md:text-5xl text-3xl font-bold text-center w-[17ch] cursor-pointer
 	  hover:text-gray-400"
-            for="input"
-          >
-            Create your first shortcut
-          </label>
-          <section class="flex flex-col justify-end h-full" />
-          <Form client:load />
-          <SignInWith image={google.src}>
-            <SignIn provider="google">Sign in with Google</SignIn>
-          </SignInWith>
-          <SignInWith image={github.src}>
-            <SignIn provider="github">Sign in with Github</SignIn>
-          </SignInWith>
-        </article>
-      )
-    }
+        for="input"
+      >
+        Create your custom shortcut
+      </label>
+      <section class="h-full flex flex-col justify-end">
+        <Form client:load session={session} />
+
+        <SessionButtons client:load session={session} />
+      </section>
+      <a
+        href="/shortcuts"
+        class="bg-gray-700 absolute -bottom-24 w-full text-center rounded py-3 hover:outline"
+      >
+        Go to Your Shortcuts
+        <i
+          class="fa-solid fa-arrow-right absolute top-3.25 md:right-[8rem] right-10 text-4xl md:scale-100 scale-75"
+        ></i>
+      </a>
+    </article>
   </main>
 </Layout>
