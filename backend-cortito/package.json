@@ -6,7 +6,8 @@
   "scripts": {
     "test": "test",
     "dev": "nodemon src/index.js",
-    "start": "node src/index.js"
+    "start": "node src/index.js",
+    "build": "npm install"
   },
   "type": "module",
   "author": "Josemigg",
