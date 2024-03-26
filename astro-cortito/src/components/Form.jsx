@@ -12,8 +12,13 @@ const Form = ({ session }) => {
         e.preventDefault()
         if (oldLink.length === 0) return setError(true)
         const waiting = await createShortcut({ oldLink, authorEmail: session && session.user?.email })
-        if (typeof waiting !== String) return setWaitingMsg(true)
-        else {
+        await redirect(waiting)
+
+    }
+    const redirect = async (waiting) => {
+        if (waiting === undefined) {
+            setWaitingMsg(true)
+        } else {
             setWaitingMsg(false)
             window.location.pathname = '/success'
             setError(false)
