@@ -6,11 +6,14 @@ const Form = ({ session }) => {
     const [oldLink, setOldLink] = useState("")
     const [bluring, setBluring] = useState(true)
     const [error, setError] = useState(false)
+    const [waitingMsg, setWaitingMsg] = useState(false)
 
     const handleSubmit = async (e) => {
         e.preventDefault()
         if (oldLink.length === 0) return setError(true)
-        await createShortcut({ oldLink, authorEmail: session && session.user?.email })
+        const waiting = await createShortcut({ oldLink, authorEmail: session && session.user?.email })
+        if (typeof waiting !== String) return setWaitingMsg(true)
+        setWaitingMsg(false)
         window.location.pathname = '/success'
         setError(false)
         setOldLink("")
@@ -29,6 +32,7 @@ const Form = ({ session }) => {
     return (
         <>
             {error && <p className="mr-40 mb-2 text-sm text-red-600">You have to enter a link</p>}
+            {waitingMsg && <p className="mb-2 text-sm text-red-600">Database is waking up, wait a minute</p>}
 
             <form className="h-12 flex items-center gap-4 mb-4 md:scale-125" onSubmit={handleSubmit}>
                 <div className="relative h-10 w-full min-w-[200px] flex">
