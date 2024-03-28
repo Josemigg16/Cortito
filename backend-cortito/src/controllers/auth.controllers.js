@@ -25,7 +25,7 @@ export const register = async (req, res) => {
                 email,
                 name,
                 posts: {
-                    connect: posts && fixedPosts
+                    connect: posts
                 }
 
             }
