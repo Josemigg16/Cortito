@@ -153,7 +153,6 @@ export const getShortcuts = async (req, res) => {
 }
 
 export const getOneShortcut = async (req, res) => {
-    console.log(req.params)
     try {
         const shortcut = await prisma.post.findFirst({
             where: {
