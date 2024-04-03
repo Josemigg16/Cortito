@@ -1,0 +1,15 @@
+---
+import GoogleIcon from './svg/Google.astro'
+import GithubICon from './svg/Github.astro'
+const { className, provider } = Astro.props
+---
+
+<button
+  class={`${className} flex flex-nowrap items-center gap-2 rounded-full py-2 px-4 shadow`}
+>
+  {provider === 'google' && (<GoogleIcon className="w-5" />)}
+  {provider === 'github' && (<GithubICon className="w-5" />)}
+  <p class="text-nowrap">
+    <slot />
+  </p>
+</button>
