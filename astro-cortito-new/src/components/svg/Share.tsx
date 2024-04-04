@@ -1,4 +1,4 @@
-import type { SVGProps } from '../types'
+import type { SVGProps } from '../../types'
 
 export default function Share({ className }: SVGProps) {
   return (
