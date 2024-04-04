@@ -10,4 +10,5 @@ export default defineConfig({
   integrations: [tailwind(), react(), auth()],
   output: 'server',
   adapter: vercel(),
+  prefetch: true,
 })
