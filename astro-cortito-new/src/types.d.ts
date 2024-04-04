@@ -3,9 +3,14 @@ export interface SVGProps {
 }
 
 export interface Shortcut {
+  id: string
   title?: string
   description?: string
   oldLink: string
   newLink: string
-  authorID?: string
+  authorId?: string
+}
+
+export interface ShortcutAsProp {
+  shortcut: Shortcut
 }
