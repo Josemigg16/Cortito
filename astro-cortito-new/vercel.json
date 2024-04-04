@@ -1,9 +1,0 @@
-{
-    "build": {
-        "rollup": {
-            "external": [
-                "fsevents"
-            ]
-        }
-    }
-}
