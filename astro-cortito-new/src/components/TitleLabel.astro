@@ -1,0 +1,21 @@
+---
+const { Htmlfor } = Astro.props
+---
+
+<label
+  for={Htmlfor}
+  class="mx-auto block cursor-pointer px-1 text-center text-4xl font-bold uppercase text-gray-100 transition-colors hover:text-gray-400 md:w-full md:text-nowrap md:text-6xl"
+>
+  <slot />
+</label>
+<script>
+  const $label = document.querySelector('label') as HTMLLabelElement
+  $label.addEventListener('click', () => {
+    $label?.classList.remove('cursor-pointer')
+    $label.classList.remove('hover:text-gray-400')
+    setTimeout(() => {
+      $label?.classList.add('cursor-pointer')
+      $label.classList.add('hover:text-gray-400')
+    }, 500)
+  })
+</script>

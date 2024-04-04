@@ -1,26 +1,20 @@
 ---
 import Layout from '../layouts/Layout.astro'
+import LabelTitle from '../components/TitleLabel.astro'
 import Form from '../components/Form.tsx'
+import WriteDel from '../components/WriteDel.astro'
 import SessionButton from '../components/SessionButton.astro'
 ---
 
-<Layout title="Welcome to Astro.">
+<Layout title="Home">
   <article
     class="md relative mb-36 flex h-[450px] min-h-fit w-[262px] min-w-[218px] flex-col justify-between rounded-3xl bg-slate-950 bg-opacity-20 p-8 px-2 pt-10 md:w-[750px] md:justify-around md:px-16"
   >
-    <label
-      for="link-input"
-      class="mx-auto block cursor-pointer px-1 text-center text-4xl font-bold uppercase text-gray-100 transition-colors hover:text-gray-400 md:w-full md:text-nowrap md:text-6xl"
-    >
-      EASY LINK SHORTENER
-    </label>
+    <LabelTitle Htmlfor="link-input">EASY LINK SHORTENER</LabelTitle>
+
     <main class="items-center md:flex">
-      <section>
-        <p
-          class="animate-wridel hidden select-none text-white opacity-55 md:block"
-        >
-          Signing up you can save your shortcuts...
-        </p>
+      <section class="md:w-[369px]">
+        <WriteDel> Signing up you can save your shortcuts... </WriteDel>
         <Form client:load className="h-[120px] p-3" />
       </section>
       <footer class="mt-6 flex h-[100px] flex-col gap-2 md:mt-8">
@@ -40,33 +34,3 @@ import SessionButton from '../components/SessionButton.astro'
     </main>
   </article>
 </Layout>
-<script>
-  const $label = document.querySelector('label') as HTMLLabelElement
-  $label.addEventListener('click', () => {
-    $label?.classList.remove('cursor-pointer')
-    $label.classList.remove('hover:text-gray-400')
-    setTimeout(() => {
-      $label?.classList.add('cursor-pointer')
-      $label.classList.add('hover:text-gray-400')
-    }, 500)
-  })
-  console.log(document.querySelector('#ellipsis'))
-</script>
-<style>
-  .animate-wridel {
-    overflow: hidden;
-    white-space: nowrap;
-    animation: write-delete 4s infinite;
-  }
-  @keyframes write-delete {
-    0% {
-      width: 0;
-    }
-    50% {
-      width: 100%;
-    }
-    100% {
-      width: 0;
-    }
-  }
-</style>

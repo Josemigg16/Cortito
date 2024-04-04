@@ -1,0 +1,53 @@
+<p
+  class="animate-wridel relative hidden select-none overflow-visible text-white opacity-55 md:block"
+>
+  <slot />
+</p>
+<style>
+  .animate-wridel {
+    overflow: hidden;
+    white-space: nowrap;
+    animation: write-delete steps(31) 4s infinite alternate-reverse;
+  }
+  .animate-wridel::after {
+    content: '';
+    @apply absolute right-0 top-0 block h-5 w-[1px] animate-ping bg-white;
+  }
+  @keyframes write-delete {
+    0% {
+      width: 0;
+    }
+    25% {
+      width: 0;
+    }
+
+    75% {
+      width: 100%;
+    }
+    100% {
+      width: 100%;
+    }
+  }
+</style>
+<style>
+  .animate-wridel {
+    overflow: hidden;
+    white-space: nowrap;
+    animation: write-delete 4s infinite;
+  }
+  .animate-wridel::after {
+    content: '';
+    @apply absolute right-0 top-0 block h-5 w-[1px] animate-ping bg-white;
+  }
+  @keyframes write-delete {
+    0% {
+      width: 0;
+    }
+    50% {
+      width: 100%;
+    }
+    100% {
+      width: 0;
+    }
+  }
+</style>
