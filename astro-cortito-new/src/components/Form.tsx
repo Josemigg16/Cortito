@@ -62,6 +62,7 @@ export default function Form({ className }: Props) {
         : (
           <>
             <a
+            target='_blank'
               className="block overflow-hidden text-ellipsis text-white"
               href={shortcut}
             >
