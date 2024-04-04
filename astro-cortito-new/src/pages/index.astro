@@ -4,6 +4,8 @@ import LabelTitle from '../components/TitleLabel.astro'
 import Form from '../components/Form.tsx'
 import WriteDel from '../components/WriteDel.astro'
 import SessionButton from '../components/SessionButton.astro'
+import { getSession } from 'auth-astro/server'
+const session = await getSession(Astro.request)
 ---
 
 <Layout title="Home">
@@ -18,18 +20,31 @@ import SessionButton from '../components/SessionButton.astro'
         <Form client:load className="h-[120px] p-3" />
       </section>
       <footer class="mt-6 flex h-[100px] flex-col gap-2 md:mt-8">
-        <SessionButton
-          provider="google"
-          className="mx-auto bg-white transition-colors hover:bg-gray-300"
-        >
-          Sign up with google
-        </SessionButton>
-        <SessionButton
-          provider="github"
-          className="mx-auto bg-slate-900 text-white transition-colors hover:bg-slate-950"
-        >
-          Sign up with github
-        </SessionButton>
+        {
+          !session ? (
+            <>
+              <SessionButton
+                provider="google"
+                className="mx-auto bg-white transition-colors hover:bg-gray-300"
+              >
+                Sign up with google
+              </SessionButton>
+              <SessionButton
+                provider="github"
+                className="mx-auto bg-slate-900 text-white transition-colors hover:bg-slate-950"
+              >
+                Sign up with github
+              </SessionButton>
+            </>
+          ) : (
+            <SessionButton
+              provider="signout"
+              className="mx-auto bg-slate-900 text-white transition-colors hover:bg-slate-950"
+            >
+              Sign out
+            </SessionButton>
+          )
+        }
       </footer>
     </main>
   </article>

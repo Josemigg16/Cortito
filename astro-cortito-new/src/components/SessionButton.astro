@@ -19,9 +19,10 @@ const { className, provider } = Astro.props
   const { signIn, signOut } = await import("auth-astro/client")
   const $buttons = document.querySelectorAll('.signin-button')
   $buttons.forEach((button) => {
-    button.addEventListener('click', (e) => {
+    button.addEventListener('click', () => {
       button.getAttribute('id') === 'google-button' && signIn('google')
       button.getAttribute('id') === 'github-button' && signIn('github')
+      button.getAttribute('id') === 'signout-button' && signOut()
      })
   })
 </script>
