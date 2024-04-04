@@ -1,7 +1,4 @@
 {
-    "ignoredFiles": [
-        "node_modules/fsevents/**"
-    ],
     "build": {
         "rollup": {
             "external": [
