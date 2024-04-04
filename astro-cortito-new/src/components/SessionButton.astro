@@ -7,7 +7,7 @@ const { className, provider } = Astro.props
 
 <button
   id={`${provider}-button`}
-  class={`${className} signin-button flex flex-nowrap items-center gap-2 rounded-full py-2 px-4 shadow`}
+  class={`${className} signin-button flex flex-nowrap items-center gap-2 rounded-xl py-2 pl-4 pr-2 shadow w-full justify-center`}
 >
   {provider === 'google' && <GoogleIcon className="w-5" />}
   {provider === 'github' && <GithubICon className="w-5" />}
