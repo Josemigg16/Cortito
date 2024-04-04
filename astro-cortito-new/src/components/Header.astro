@@ -1,3 +1,21 @@
-<header class="h-[12vh]">
-    
+---
+import { getSession } from 'auth-astro/server'
+const session = await getSession(Astro.request)
+---
+
+<header
+  class="flex h-[12vh] w-screen min-w-[350px] items-center justify-end px-6"
+>
+  {
+    session && Astro.url.pathname !== '/' && (
+      <div class="flex items-center gap-5">
+        <h2 class="mt-2 text-white opacity-90">{session?.user?.name}</h2>
+        <img
+          class="w-14 rounded-full"
+          src={session?.user?.image}
+          alt={`${session?.user?.name} image`}
+        />
+      </div>
+    )
+  }
 </header>
