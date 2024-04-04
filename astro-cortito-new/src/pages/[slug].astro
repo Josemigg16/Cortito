@@ -1,0 +1,10 @@
+---
+import { fixURL } from '../helpers/fixURL'
+import { getShortcut } from '../libs/getShortcut'
+const { slug } = Astro.params
+const shortcut = await getShortcut(slug)
+if (!shortcut) return Astro.redirect('/404')
+
+const newURL = fixURL(shortcut.oldLink)
+return Astro.redirect(`${newURL}`)
+---
