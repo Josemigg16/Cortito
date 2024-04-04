@@ -1,0 +1,5 @@
+{
+    "ignoredFiles": [
+        "node_modules/fsevents/**"
+    ]
+}
