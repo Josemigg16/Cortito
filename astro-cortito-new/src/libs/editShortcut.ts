@@ -21,8 +21,9 @@ export default async function editShortcut({
     })
     const editedShortcut = await res.json()
     return editedShortcut
-  } catch (error) {
-    console.log(error)
+  }
+  catch (error) {
+    console.error(error)
     return undefined
   }
 }

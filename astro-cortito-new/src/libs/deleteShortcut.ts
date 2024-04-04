@@ -12,12 +12,14 @@ export default async function deleteShortcut({ id }: Shortcut): Promise<boolean>
         body: JSON.stringify({
           id,
         }),
-      }
+      },
     )
-    if(res.ok) return true
+    if (res.ok)
+      return true
     return false
-  } catch (error) {
-    console.log(error)
+  }
+  catch (error) {
+    console.error(error)
     return false
   }
 }

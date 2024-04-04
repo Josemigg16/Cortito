@@ -1,13 +1,13 @@
-import { useState, type MouseEvent } from 'react'
+import { type MouseEvent, useState } from 'react'
 import { makeURL } from '../helpers/makeURL'
 import editShortcut from '../libs/editShortcut'
 import deleteShortcut from '../libs/deleteShortcut'
 import type { Shortcut } from '../types'
 
-const useShortcutItem = (shortcut: Shortcut) => {
+function useShortcutItem(shortcut: Shortcut) {
   const [title, setTitle] = useState(shortcut?.title || 'Untitled')
   const [description, setDescription] = useState(
-    shortcut?.description || 'There is no description.'
+    shortcut?.description || 'There is no description.',
   )
   const [oldLink, setOldLink] = useState(shortcut?.oldLink)
 
