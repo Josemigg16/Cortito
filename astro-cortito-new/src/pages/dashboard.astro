@@ -2,20 +2,20 @@
 import Layout from '../layouts/Layout.astro'
 import ToggleView from '../components/ToggleView'
 import ShowShortcuts from '../components/ShowShortcuts'
-import { getSession } from 'auth-astro/server';
+import { getSession } from 'auth-astro/server'
 const session = await getSession(Astro.request)
 ---
 
-<Layout title="dashboard">
-  <section class="h-[88vh] bg-red-400 p-12">
-    <header class="flex items-center justify-between">
-      <h1
-        class="text-center text-3xl font-bold text-white opacity-90 md:text-left md:text-6xl"
-      >
+<Layout title='dashboard'>
+	<section class='h-[88vh] bg-red-400 p-12'>
+		<header class='flex items-center justify-between'>
+			<h1
+				class='text-center text-3xl font-bold text-white opacity-90 md:text-left md:text-6xl'
+			>
         Your shortcuts
-      </h1>
-      <ToggleView client:load />
-    </header>
-    <ShowShortcuts client:load session={session} />
-  </section>
+			</h1>
+			<ToggleView client:load />
+		</header>
+		<ShowShortcuts client:load session={session} />
+	</section>
 </Layout>

@@ -8,48 +8,50 @@ import { getSession } from 'auth-astro/server'
 const session = await getSession(Astro.request)
 ---
 
-<Layout title="Home">
-  <article
-    class="relative mx-auto mb-36 flex h-[450px] min-h-fit w-[262px] min-w-[218px] flex-col items-center justify-around rounded-3xl bg-slate-950 bg-opacity-20 p-8 pt-10 md:w-fit md:px-16"
-  >
-    <LabelTitle Htmlfor="link-input">EASY LINK SHORTENER</LabelTitle>
+<Layout title='Home'>
+	<article
+		class='relative mx-auto mb-36 flex h-[450px] min-h-fit w-[262px] min-w-[218px] flex-col items-center justify-around rounded-3xl bg-slate-950 bg-opacity-20 p-8 pt-10 md:w-fit md:px-16'
+	>
+		<LabelTitle Htmlfor='link-input'>EASY LINK SHORTENER</LabelTitle>
 
-    <main class="w-[198px] md:w-[369px]">
-      <section class="mx-auto">
-        <WriteDel> Signing up you can save your shortcuts... </WriteDel>
-        <Form client:load />
+		<main class='w-[198px] md:w-[369px]'>
+			<section class='mx-auto'>
+				<WriteDel> Signing up you can save your shortcuts... </WriteDel>
+				<Form client:load />
 
-        <footer class="mt-2 flex gap-2">
-          {
-            !session ? (
-              <>
-                <SessionButton
-                  provider="google"
-                  className="mx-auto bg-white transition-colors hover:bg-gray-300"
-                />
-                <SessionButton
-                  provider="github"
-                  className="mx-auto bg-slate-900 text-white transition-colors hover:bg-slate-950"
-                />
-              </>
-            ) : (
-              <SessionButton
-                provider="signout"
-                className="mx-auto bg-slate-900 text-white transition-colors hover:bg-slate-950"
-              >
+				<footer class='mt-2 flex gap-2'>
+					{
+						!session
+							? (
+								<>
+									<SessionButton
+										provider='google'
+										className='mx-auto bg-white transition-colors hover:bg-gray-300'
+									/>
+									<SessionButton
+										provider='github'
+										className='mx-auto bg-slate-900 text-white transition-colors hover:bg-slate-950'
+									/>
+								</>
+							)
+							: (
+								<SessionButton
+									provider='signout'
+									className='mx-auto bg-slate-900 text-white transition-colors hover:bg-slate-950'
+								>
                 Sign out
-              </SessionButton>
-            )
-          }
-        </footer>
-      </section>
-    </main>
-    <a
-      href="/dashboard"
-      class="absolute bottom-6 text-white"
-      data-astro-prefetch="load"
-    >
+								</SessionButton>
+							)
+					}
+				</footer>
+			</section>
+		</main>
+		<a
+			href='/dashboard'
+			class='absolute bottom-6 text-white'
+			data-astro-prefetch='load'
+		>
       Go to dashboard {'-->'}</a
-    >
-  </article>
+		>
+	</article>
 </Layout>

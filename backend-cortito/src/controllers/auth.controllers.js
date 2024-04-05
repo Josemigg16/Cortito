@@ -122,7 +122,7 @@ export const createLink = async (req, res) => {
           description: description || null,
         },
       })
-      res.send({shortcut: link.newLink})
+      res.send({ shortcut: link.newLink })
     }
   } catch (err) {
     console.log(err)
@@ -168,18 +168,15 @@ export const getOneShortcut = async (req, res) => {
 
 export const getUserShortcuts = async (req, res) => {
   try {
-    const links = await prisma.post.findMany({
-      select: {
-        id: true,
-        oldLink: true,
-        newLink: true,
-        title: true,
-        description: true,
-      },
+    const links = await prisma.user.findFirst({
       where: {
-        authorId: req.body.authorId,
+        email: req.params.email,
+      },
+      select: {
+        posts: true,
       },
     })
+    console.log(links.posts)
     res.send(JSON.stringify(links))
   } catch (err) {
     console.log(err)
@@ -203,7 +200,6 @@ export const deleteShortcut = async (req, res) => {
 }
 
 export const editShortcut = async (req, res) => {
-  console.log(req.body)
   try {
     const shortcut = await prisma.post.update({
       where: {
@@ -215,7 +211,6 @@ export const editShortcut = async (req, res) => {
         oldLink: req.body.oldLink,
       },
     })
-    console.log(shortcut)
     res.sendStatus(200)
   } catch (err) {
     console.log(err)

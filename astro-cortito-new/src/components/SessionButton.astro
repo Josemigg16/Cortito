@@ -6,23 +6,23 @@ const { className, provider } = Astro.props
 ---
 
 <button
-  id={`${provider}-button`}
-  class={`${className} signin-button flex flex-nowrap items-center gap-2 rounded-xl py-2 pl-4 pr-2 shadow w-full justify-center`}
+	id={`${provider}-button`}
+	class={`${className} signin-button flex flex-nowrap items-center gap-2 rounded-xl py-2 pl-4 pr-2 shadow w-full justify-center`}
 >
-  {provider === 'google' && <GoogleIcon className="w-5" />}
-  {provider === 'github' && <GithubICon className="w-5" />}
-  <p class="text-nowrap">
-    <slot />
-  </p>
+	{provider === 'google' && <GoogleIcon className='w-5' />}
+	{provider === 'github' && <GithubICon className='w-5' />}
+	<p class='text-nowrap'>
+		<slot />
+	</p>
 </button>
 <script>
-  const { signIn, signOut } = await import("auth-astro/client")
-  const $buttons = document.querySelectorAll('.signin-button')
-  $buttons.forEach((button) => {
-    button.addEventListener('click', () => {
-      button.getAttribute('id') === 'google-button' && signIn('google')
-      button.getAttribute('id') === 'github-button' && signIn('github')
-      button.getAttribute('id') === 'signout-button' && signOut()
-     })
-  })
+	const { signIn, signOut } = await import('auth-astro/client')
+	const $buttons = document.querySelectorAll('.signin-button')
+	$buttons.forEach((button) => {
+		button.addEventListener('click', () => {
+			button.getAttribute('id') === 'google-button' && signIn('google')
+			button.getAttribute('id') === 'github-button' && signIn('github')
+			button.getAttribute('id') === 'signout-button' && signOut()
+		})
+	})
 </script>

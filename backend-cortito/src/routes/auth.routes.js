@@ -9,7 +9,7 @@ router.get('/users/:email', getOneUser)
 router.post('/create-link', createLink)
 router.get('/shortcuts', getShortcuts)
 router.get('/shortcuts/:newlink', getOneShortcut)
-router.get('/get-user-shortcuts', getUserShortcuts)
+router.get('/users/:email/shortcuts', getUserShortcuts)
 router.post('/delete-shortcut', deleteShortcut)
 router.post('/edit-shortcut', editShortcut)
 
