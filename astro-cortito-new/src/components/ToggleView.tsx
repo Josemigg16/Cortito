@@ -6,37 +6,31 @@ import GridIcon from './svg/GridIcon'
 
 function ToggleView () {
 	const view = useStore(viewStore)
-	const setView = (value: string) => {
-		viewStore.set(value)
-		localStorage.setItem('view', value)
-		return value
+	const setView = (currentView: string) => {
+		viewStore.set(currentView)
+		localStorage.setItem('view', currentView)
+		return currentView
 	}
 
 	useEffect(() => {
-		const $listButton = document.getElementById('listButton')
-		const $gridButton = document.getElementById('gridButton')
-
-		if (view === 'grid') {
-			$gridButton?.classList.add('bg-gray-500')
-			$listButton?.classList.remove('bg-gray-500')
+		if (typeof window !== 'undefined') {
+			const savedView = localStorage.getItem('view')
+			if (savedView) setView(savedView)
+			else setView('grid')
 		}
-		if (view === 'list') {
-			$listButton?.classList.add('bg-gray-500')
-			$gridButton?.classList.remove('bg-gray-500')
-		}
-	}, [view])
+	}, [])
 
 	return (
 		<div className='relative flex justify-around scale-[.7] md:scale-100 rounded-md p-2 bg-slate-800 text-gray-200'>
 			<button
-				className='rounded transition-[background-color]'
+				className={` ${view === 'list' ? 'bg-gray-500' : ''} rounded transition-[background-color]`}
 				id='listButton'
 				onClick={() => setView('list')}
 			>
 				<ListIcon className='w-12 p-2' />
 			</button>
 			<button
-				className='rounded transition-[background-color]'
+				className={` ${view === 'grid' ? 'bg-gray-500' : ''} rounded transition-[background-color]`}
 				id='gridButton'
 				onClick={() => setView('grid')}
 			>

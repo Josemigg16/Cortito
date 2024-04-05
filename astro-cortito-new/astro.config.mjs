@@ -7,8 +7,8 @@ import vercel from '@astrojs/vercel/serverless'
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [tailwind(), react(), auth()],
-  output: 'server',
-  adapter: vercel(),
-  prefetch: true,
+	integrations: [tailwind(), react(), auth()],
+	output: 'server',
+	adapter: vercel(),
+	prefetch: true
 })

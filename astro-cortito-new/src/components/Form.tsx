@@ -62,7 +62,7 @@ export default function Form ({ className }: Props) {
 						<h4 className='text-white text-lg pl-2'>Your shortchut:</h4>
 						<a
 							target='_blank'
-							className='mb-2 flex h-12 items-center rounded-xl bg-gray-700  bg-opacity-40 px-2 text-white'
+							className='mb-2 flex h-12 items-center rounded-xl bg-gray-700  bg-opacity-40 px-2 text-white hover:bg-gray-600 transition-colors'
 							href={shortcut}
 						>
 							<p className='overflow-hidden text-ellipsis'>{shortcut}</p>

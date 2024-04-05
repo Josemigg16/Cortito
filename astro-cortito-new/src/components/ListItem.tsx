@@ -7,10 +7,10 @@ function ListItem ({ shortcut }: ShortcutAsProp) {
     useShortcutItem(shortcut)
 
 	return (
-		<article
-			onSubmit={handleEdit}
+		<button
+			onClick={handleEdit}
 			id='item'
-			className='relative grid h-14 cursor-pointer select-none grid-cols-2 place-content-center gap-2 bg-gray-800 pr-2 text-xl text-white transition-[background-color] hover:bg-gray-700 md:grid-cols-4'
+			className='relative grid h-14 cursor-pointer select-none grid-cols-2 place-content-center gap-2 bg-gray-800 pr-2 text-xl text-white transition-[background-color] hover:bg-gray-700 md:grid-cols-4 w-full'
 		>
 			<RowField info={title} className='uppercase' />
 			<RowField info={description} className='hidden md:block' />
@@ -20,7 +20,7 @@ function ListItem ({ shortcut }: ShortcutAsProp) {
 				isLink={true}
 				className='hidden md:block'
 			/>
-		</article>
+		</button>
 	)
 }
 

@@ -16,42 +16,40 @@ const session = await getSession(Astro.request)
 
 		<main class='w-[198px] md:w-[369px]'>
 			<section class='mx-auto'>
-				<WriteDel> Signing up you can save your shortcuts... </WriteDel>
+				<WriteDel>Signing up you can save your shortcuts...</WriteDel>
 				<Form client:load />
 
 				<footer class='mt-2 flex gap-2'>
 					{
-						!session
-							? (
-								<>
-									<SessionButton
-										provider='google'
-										className='mx-auto bg-white transition-colors hover:bg-gray-300'
-									/>
-									<SessionButton
-										provider='github'
-										className='mx-auto bg-slate-900 text-white transition-colors hover:bg-slate-950'
-									/>
-								</>
-							)
-							: (
+						!session ? (
+							<>
 								<SessionButton
-									provider='signout'
+									provider='google'
+									className='mx-auto bg-white transition-colors hover:bg-gray-300'
+								/>
+								<SessionButton
+									provider='github'
 									className='mx-auto bg-slate-900 text-white transition-colors hover:bg-slate-950'
-								>
-                Sign out
-								</SessionButton>
-							)
+								/>
+							</>
+						) : (
+							<SessionButton
+								provider='signout'
+								className='mx-auto bg-slate-900 text-white transition-colors hover:bg-slate-950'
+							>
+								Sign out
+							</SessionButton>
+						)
 					}
 				</footer>
 			</section>
 		</main>
-		<a
-			href='/dashboard'
-			class='absolute bottom-6 text-white'
-			data-astro-prefetch='load'
-		>
-      Go to dashboard {'-->'}</a
-		>
+		{
+			session && (
+				<a href='/dashboard' class='absolute bottom-6 text-white' data-astro-prefetch='load'>
+					Go to dashboard {'-->'}
+				</a>
+			)
+		}
 	</article>
 </Layout>

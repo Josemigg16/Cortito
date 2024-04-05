@@ -28,21 +28,20 @@ function ShowShortcuts ({ session }: Props) {
 	}, [])
 
 	return (
-		<main className=''>
-			{view === 'grid'
-				? (
-					<section className='grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4'>
-						{shortcuts &&
+		<>
+			{view === 'grid' && (
+				<main className='grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4'>
+					{shortcuts &&
 						shortcuts?.map((shortcut) => <Card key={shortcut.id} shortcut={shortcut} />)}
-					</section>
-				)
-				: (
-					<section className='mt-6 overflow-hidden rounded'>
-						{shortcuts &&
+				</main>
+			)}
+			{view === 'list' && (
+				<main className='mt-6 overflow-hidden rounded'>
+					{shortcuts &&
 						shortcuts?.map((shortcut) => <ListItem key={shortcut.id} shortcut={shortcut} />)}
-					</section>
-				)}
-		</main>
+				</main>
+			)}
+		</>
 	)
 }
 
