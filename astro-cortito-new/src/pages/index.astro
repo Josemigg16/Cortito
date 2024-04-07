@@ -47,7 +47,7 @@ await registerLogin({ name: session?.user?.name, email: session?.user?.email })
 		</main>
 		{
 			session && (
-				<a href='/dashboard' class='absolute bottom-6 text-white' data-astro-prefetch='load'>
+				<a href='/dashboard' class='text-white mt-6' data-astro-prefetch='load'>
 					Go to dashboard {'-->'}
 				</a>
 			)

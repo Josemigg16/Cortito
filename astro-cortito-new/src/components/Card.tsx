@@ -6,7 +6,7 @@ function Card ({ shortcut }: ShortcutAsProp) {
 	return (
 		<button
 			onMouseUp={(e: unknown) => handleEdit({ shortcut, e: e as MouseEvent })}
-			className='item relative mx-auto mt-6 flex h-56 min-h-64 min-w-[380px] flex-col justify-between overflow-hidden rounded-md bg-gray-900 text-white text-start hover:opacity-80 transition-[transform_opacity] hover:scale-105 animate-fromOpacity'
+			className='item relative mx-auto mt-6 flex h-56 min-h-64 w-[80vw] max-w-[320px] sm:max-w-[350px] sm:w-[320px] lg:w-[350px] flex-col justify-between overflow-hidden rounded-md bg-gray-900 text-white text-start hover:opacity-80 transition-[transform_opacity] hover:scale-105 animate-fromOpacity'
 		>
 			<p
 				className='overflow-hidden text-ellipsis bg-gray-800 text-2xl font-bold
@@ -20,9 +20,13 @@ function Card ({ shortcut }: ShortcutAsProp) {
 			>
 				{shortcut.description}
 			</p>
-			<footer className='h-20 overflow-hidden text-ellipsis text-nowrap bg-gray-800 p-4 w-full text-start'>
-				<p>Link to:{` ${shortcut.oldLink}`}</p>
-				<p>Go:{` ${makeURL(shortcut.newLink)}`}</p>
+			<footer className='h-20 bg-gray-800 p-4 w-full text-start'>
+				<p className='overflow-hidden text-ellipsis text-nowrap'>
+					Link to:{` ${shortcut.oldLink}`}
+				</p>
+				<p className='overflow-hidden text-ellipsis text-nowrap'>
+					Go:{` ${makeURL(shortcut.newLink)}`}
+				</p>
 			</footer>
 		</button>
 	)

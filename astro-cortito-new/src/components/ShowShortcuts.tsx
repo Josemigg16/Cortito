@@ -44,7 +44,7 @@ function ShowShortcuts ({ session }: Props) {
 				: (
 					<>
 						{view === 'grid' && (
-							<main className='grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 pb-12'>
+							<main className='grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 pb-12'>
 								{shortcuts &&
 								shortcuts?.map((shortcut) => <Card key={shortcut.id} shortcut={shortcut} />)}
 							</main>

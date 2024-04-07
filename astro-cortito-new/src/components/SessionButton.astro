@@ -10,7 +10,7 @@ const session = await getSession(Astro.request)
 	data-name={session?.user?.name}
 	data-email={session?.user?.email}
 	data-provider={provider}
-	class={`${className} signin-button flex flex-nowrap items-center gap-2 rounded-xl py-2 pl-4 pr-2 shadow w-full justify-center`}
+	class={`${className} signin-button flex flex-nowrap items-center gap-2 rounded-lg py-2 pl-4 pr-2 shadow w-full justify-center`}
 >
 	{provider === 'google' && <GoogleIcon className='w-5' />}
 	{provider === 'github' && <GithubICon className='w-5' />}

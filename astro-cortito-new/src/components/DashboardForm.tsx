@@ -1,17 +1,8 @@
 import editShortcut from '../libs/editShortcut'
 import { type FormEvent } from 'react'
 import { makeURL } from '../helpers/makeURL'
-import { createdStore } from '../stores/createdStore'
-import { isEditingStore } from '../stores/isEditingStore'
-import { loadingShortcutStore } from '../stores/loadingShortcutStore'
-import { useStore } from '@nanostores/react'
-import {
-	titleStore,
-	descriptionStore,
-	oldLinkStore,
-	newLinkStore,
-	shortcutIdStore
-} from '../stores/shortcutStore'
+import { useShortcut } from '../hooks/useShortcut'
+import { useError } from '../hooks/useError'
 import { handleCloseModal } from '../helpers/handleCloseModal'
 import Loading from '../components/svg/Loading'
 import deleteShortcut from '../libs/deleteShortcut'
@@ -21,23 +12,29 @@ interface Props {
 }
 
 export default function DashboardForm ({ email }: Props) {
-	const loadingShortcut = useStore(loadingShortcutStore)
-	const setLoadingShortcut = (active: boolean) => loadingShortcutStore.set(active)
-	const isEditing = useStore(isEditingStore)
-	const created = useStore(createdStore)
-	const setCreated = (active: boolean) => createdStore.set(active)
-	const id = useStore(shortcutIdStore)
-	const title = useStore(titleStore)
-	const setTitle = (title: string) => titleStore.set(title)
-	const description = useStore(descriptionStore)
-	const setDescription = (description: string) => descriptionStore.set(description)
-	const oldLink = useStore(oldLinkStore)
-	const setOldLink = (oldLink: string) => oldLinkStore.set(oldLink)
-	const newLink = useStore(newLinkStore)
-	const setNewLink = (newLink: string) => newLinkStore.set(newLink)
+	const {
+		loadingShortcut,
+		setLoadingShortcut,
+		isEditing,
+		created,
+		setCreated,
+		id,
+		title,
+		setTitle,
+		description,
+		setDescription,
+		oldLink,
+		setOldLink,
+		newLink,
+		setNewLink
+	} = useShortcut()
+
+	const { error, setError } = useError()
 
 	const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
+		if (!oldLink) return setError(true)
+		setError(false)
 		setLoadingShortcut(true)
 		const shortcut = await editShortcut({ email, title, description, oldLink, id })
 		if (shortcut) setNewLink(makeURL(shortcut.newLink))
@@ -98,7 +95,7 @@ export default function DashboardForm ({ email }: Props) {
 									</>
 								)
 								: (
-									<>
+									<div className='w-full flex flex-col'>
 										<input
 											id='title-input'
 											className='my-1 py-3 pl-3 rounded outline-none hover:bg-slate-300 transition-colors'
@@ -115,13 +112,13 @@ export default function DashboardForm ({ email }: Props) {
 											maxLength={160}
 										/>
 										<input
-											className='my-1 py-3 pl-3 rounded outline-none hover:bg-slate-300 transition-colors'
+											className={`my-1 py-3 pl-3 rounded outline-none hover:bg-slate-300 transition-colors ${error ? 'bg-red-100' : ''}`}
 											type='text'
 											value={oldLink}
 											placeholder='Old link'
 											onChange={(e) => setOldLink(e.target.value)}
 										/>
-									</>
+									</div>
 								)}
 							{isEditing && (
 								<div className='flex gap-1 my-1 text-white md:gap-2'>
