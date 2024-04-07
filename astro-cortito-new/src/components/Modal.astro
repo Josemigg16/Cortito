@@ -1,0 +1,44 @@
+---
+import { getSession } from 'auth-astro/server'
+import DashboardForm from '../components/DashboardForm'
+import ShortcutButton from './ShortcutButton.astro'
+const session = await getSession(Astro.request)
+---
+
+<ShortcutButton />
+<main
+	id='modal'
+	class='h-[100vh] fixed bg-black z-50 w-[100vw] top-0 left-0 bg-opacity-50 hidden place-content-center'
+>
+	<DashboardForm client:load email={session?.user?.email} />
+</main>
+<script>
+	import { modalStore } from '../stores/modalStore'
+	import { handleCloseModal } from '../helpers/handleCloseModal'
+
+	const $modal = document.querySelector('#modal')
+	if ($modal) {
+		const $dashboardForm = $modal.querySelector('#dashboard-form') as HTMLFormElement
+		document?.addEventListener('keyup', (e: Event) => {
+			if ((e as KeyboardEvent).key === 'Escape') handleCloseModal()
+		})
+
+		$modal?.addEventListener('click', (e: Event) => {
+			if (!$dashboardForm.contains(e.target as Node)) handleCloseModal()
+		})
+
+		modalStore.subscribe((active) => {
+			if (active) {
+				$modal?.classList?.add('grid')
+				$modal?.classList?.remove('hidden')
+				$dashboardForm?.classList?.add('animate-fadeIn')
+			} else {
+				$dashboardForm?.classList?.add('animate-fadeOut')
+				setTimeout(() => {
+					$modal?.classList?.add('hidden')
+					$dashboardForm?.classList?.remove('animate-fadeOut')
+				}, 350)
+			}
+		})
+	}
+</script>
