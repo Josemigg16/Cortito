@@ -3,7 +3,6 @@ import { randomString } from "../helpers/randomString.js"
 
 export const register = async (req, res) => {
   const { email, name, posts } = req.body
-  console.log(posts)
 
   try {
     const isDuplicated = await prisma.user.findFirst({
@@ -16,16 +15,12 @@ export const register = async (req, res) => {
     })
 
     if (isDuplicated) {
-      if (posts) addPosts({ authorId: isDuplicated.id, posts })
       return res.sendStatus(200)
     }
-    const user = await prisma.user.create({
+    await prisma.user.create({
       data: {
         email,
         name,
-        posts: {
-          connect: posts,
-        },
       },
     })
     res.sendStatus(200)
@@ -96,10 +91,10 @@ export const getOneUser = async (req, res) => {
 }
 
 export const createLink = async (req, res) => {
-  const { oldLink, title, authorEmail, description } = req.body
+  const { oldLink, title, email, description } = req.body
   if (oldLink === "") return
   try {
-    if (authorEmail) {
+    if (email) {
       const link = await prisma.post.create({
         data: {
           oldLink: oldLink,
@@ -107,12 +102,13 @@ export const createLink = async (req, res) => {
           title: title || null,
           author: {
             connect: {
-              email: authorEmail,
+              email,
             },
           },
           description: description || null,
         },
       })
+      res.send({ shortcut: link.newLink })
     } else {
       const link = await prisma.post.create({
         data: {
@@ -176,7 +172,6 @@ export const getUserShortcuts = async (req, res) => {
         posts: true,
       },
     })
-    console.log(links.posts)
     res.send(JSON.stringify(links))
   } catch (err) {
     console.log(err)
@@ -200,18 +195,42 @@ export const deleteShortcut = async (req, res) => {
 }
 
 export const editShortcut = async (req, res) => {
+  const { id, title, description, oldLink, email } = req.body
+
   try {
-    const shortcut = await prisma.post.update({
-      where: {
-        id: req.body.id,
-      },
-      data: {
-        title: req.body.title,
-        description: req.body.description,
-        oldLink: req.body.oldLink,
-      },
-    })
-    res.sendStatus(200)
+    if (id) {
+      const shortcut = await prisma.post.update({
+        where: {
+          id,
+        },
+        data: {
+          title,
+          description,
+          oldLink,
+          author: {
+            connect: {
+              email
+            }
+          }
+        },
+      })
+      return res.send(JSON.stringify(shortcut))
+    } else {
+      const shortcut = await prisma.post.create({
+        data: {
+          title,
+          description,
+          oldLink,
+          newLink: randomString(),
+          author: {
+            connect: {
+              email,
+            }
+          }
+        },
+      })
+      res.send(JSON.stringify(shortcut))
+    }
   } catch (err) {
     console.log(err)
     res.send(404)
