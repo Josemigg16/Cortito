@@ -27,3 +27,7 @@ export interface CreatingUser {
 	name: string | null | undefined
 	posts?: Shortcut[]
 }
+
+export interface ShortcutID {
+	id: string | undefined
+}

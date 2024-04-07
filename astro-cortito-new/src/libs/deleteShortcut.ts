@@ -1,6 +1,6 @@
-import type { Shortcut } from '../types'
+import type { ShortcutID } from '../types'
 
-export default async function deleteShortcut ({ id }: Shortcut): Promise<boolean> {
+export default async function deleteShortcut ({ id }: ShortcutID): Promise<boolean> {
 	try {
 		const res = await fetch(
 			`${import.meta.env.PUBLIC_API_URL}/delete-shortcut`,

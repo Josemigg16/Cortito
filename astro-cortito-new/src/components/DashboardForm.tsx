@@ -14,6 +14,7 @@ import {
 } from '../stores/shortcutStore'
 import { handleCloseModal } from '../helpers/handleCloseModal'
 import Loading from '../components/svg/Loading'
+import deleteShortcut from '../libs/deleteShortcut'
 
 interface Props {
 	email: string | null | undefined
@@ -41,6 +42,12 @@ export default function DashboardForm ({ email }: Props) {
 		const shortcut = await editShortcut({ email, title, description, oldLink, id })
 		if (shortcut) setNewLink(makeURL(shortcut.newLink))
 		setLoadingShortcut(false)
+		setCreated(true)
+	}
+
+	const handleDelete = async () => {
+		await deleteShortcut({ id })
+		handleCloseModal()
 		setCreated(true)
 	}
 
@@ -140,13 +147,16 @@ export default function DashboardForm ({ email }: Props) {
 				type={created ? 'button' : 'submit'}
 				disabled={loadingShortcut}
 				onClick={created ? handleCloseModal : undefined}
-				className={`text-white bg-slate-800 py-3 text-nowrap rounded my-1 text-xl md:text-2xl md:mt-1 transition-colors ${!loadingShortcut ? 'hover:bg-slate-700' : ''}`}
+				className={`text-white bg-slate-800 py-3 text-nowrap rounded my-1 text-xl md:text-2xl md:mt-1 transition-colors ${
+					!loadingShortcut ? 'hover:bg-slate-700' : ''
+				}`}
 			>
 				{created ? 'Cerrar' : !isEditing ? 'Create shortcut' : 'Confirm'}
 			</button>
 			{isEditing && (
 				<button
-					type='submit'
+					type='button'
+					onClick={handleDelete}
 					className='bg-transparent py-3 text-nowrap rounded my-1 text-xl md:text-2xl md:mt-0.5 text-red-600 border-2 border-red-600 hover:bg-red-600 hover:text-white transition-colors'
 				>
 					Delete Shortcut
