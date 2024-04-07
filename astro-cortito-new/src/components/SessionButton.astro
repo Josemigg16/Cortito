@@ -1,12 +1,15 @@
 ---
+import { getSession } from 'auth-astro/server'
 import GoogleIcon from './svg/Google.astro'
 import GithubICon from './svg/Github.astro'
-
 const { className, provider } = Astro.props
+const session = await getSession(Astro.request)
 ---
 
 <button
-	id={`${provider}-button`}
+	data-name={session?.user?.name}
+	data-email={session?.user?.email}
+	data-provider={provider}
 	class={`${className} signin-button flex flex-nowrap items-center gap-2 rounded-xl py-2 pl-4 pr-2 shadow w-full justify-center`}
 >
 	{provider === 'google' && <GoogleIcon className='w-5' />}
@@ -17,12 +20,13 @@ const { className, provider } = Astro.props
 </button>
 <script>
 	const { signIn, signOut } = await import('auth-astro/client')
-	const $buttons = document.querySelectorAll('.signin-button')
-	$buttons.forEach((button) => {
-		button.addEventListener('click', () => {
-			button.getAttribute('id') === 'google-button' && signIn('google')
-			button.getAttribute('id') === 'github-button' && signIn('github')
-			button.getAttribute('id') === 'signout-button' && signOut()
+	// eslint-disable-next-line no-undef
+	const $buttons = document.querySelectorAll('.signin-button') as NodeListOf<HTMLButtonElement>
+	$buttons.forEach(($button) => {
+		const { provider } = $button.dataset
+		$button.addEventListener('click', async () => {
+			if (!provider) return signOut()
+			signIn(`${provider}`)
 		})
 	})
 </script>
