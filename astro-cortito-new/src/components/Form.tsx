@@ -5,10 +5,11 @@ import Share from './svg/Share'
 import Copy from './svg/Copy'
 
 interface Props {
-  className?: string
+	className?: string
+	email: string | null | undefined
 }
 
-export default function Form ({ className }: Props) {
+export default function Form ({ className, email }: Props) {
 	const [loading, setLoading] = useState(false)
 	const [link, setLink] = useState('')
 	const [shortcut, setShortcut] = useState('')
@@ -23,7 +24,8 @@ export default function Form ({ className }: Props) {
 					'Content-Type': 'application/json'
 				},
 				body: JSON.stringify({
-					oldLink: link
+					oldLink: link,
+					email
 				})
 			})
 			const data = await res.json()
@@ -46,10 +48,10 @@ export default function Form ({ className }: Props) {
 									placeholder='Enter your link'
 									type='text'
 									value={link}
-									onChange={e => setLink(e.target.value)}
+									onChange={(e) => setLink(e.target.value)}
 								/>
 								<button className='mx-auto mt-2 block h-8 w-full rounded-lg bg-slate-900 px-3 text-white shadow-xl transition-colors hover:bg-slate-950 md:h-10'>
-                    Create
+							Create
 								</button>
 							</>
 						)
@@ -70,11 +72,11 @@ export default function Form ({ className }: Props) {
 						<footer className='flex gap-2'>
 							<button className='relative block h-8 w-full rounded-xl bg-gray-700 bg-opacity-40 text-white transition-colors hover:bg-gray-600'>
 								<Copy className='absolute left-2 top-2 w-4' />
-                Copy
+							Copy
 							</button>
 							<button className='relative block h-8 w-full rounded-xl bg-gray-700 bg-opacity-40 text-white transition-colors hover:bg-gray-600'>
 								<Share className='absolute left-2 top-2 w-4' />
-                Share
+							Share
 							</button>
 						</footer>
 						<button
@@ -84,7 +86,7 @@ export default function Form ({ className }: Props) {
 							}}
 							className='relative mt-2 block w-full rounded-xl bg-gray-700 bg-opacity-40 px-4 py-1 pl-7 text-white transition-colors hover:bg-gray-600'
 						>
-              Volver
+						Volver
 						</button>
 					</>
 				)}
