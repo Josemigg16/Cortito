@@ -1,3 +1,3 @@
 import { atom } from 'nanostores'
 
-export const viewStore = atom('')
+export const viewStore = atom<string>('')
