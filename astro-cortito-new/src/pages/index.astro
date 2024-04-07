@@ -5,7 +5,9 @@ import Form from '../components/Form.tsx'
 import WriteDel from '../components/WriteDel.astro'
 import SessionButton from '../components/SessionButton.astro'
 import { getSession } from 'auth-astro/server'
+import registerLogin from '../libs/registerLogin'
 const session = await getSession(Astro.request)
+await registerLogin({ name: session?.user?.name, email: session?.user?.email })
 ---
 
 <Layout title='Home'>
@@ -17,29 +19,28 @@ const session = await getSession(Astro.request)
 		<main class='w-[198px] md:w-[369px]'>
 			<section class='mx-auto'>
 				<WriteDel>Signing up you can save your shortcuts...</WriteDel>
-				<Form client:load />
+				<Form email={session?.user?.email} client:load />
 
 				<footer class='mt-2 flex gap-2'>
 					{
-						!session ? (
-							<>
-								<SessionButton
-									provider='google'
-									className='mx-auto bg-white transition-colors hover:bg-gray-300'
-								/>
-								<SessionButton
-									provider='github'
-									className='mx-auto bg-slate-900 text-white transition-colors hover:bg-slate-950'
-								/>
-							</>
-						) : (
-							<SessionButton
-								provider='signout'
-								className='mx-auto bg-slate-900 text-white transition-colors hover:bg-slate-950'
-							>
+						!session
+							? (
+								<>
+									<SessionButton
+										provider='google'
+										className='mx-auto bg-white transition-colors hover:bg-gray-300'
+									/>
+									<SessionButton
+										provider='github'
+										className='mx-auto bg-slate-900 text-white transition-colors hover:bg-slate-950'
+									/>
+								</>
+							)
+							: (
+								<SessionButton className='mx-auto bg-slate-900 text-white transition-colors hover:bg-slate-950'>
 								Sign out
-							</SessionButton>
-						)
+								</SessionButton>
+							)
 					}
 				</footer>
 			</section>
