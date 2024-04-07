@@ -1,11 +1,12 @@
-import type { Shortcut } from '../types'
+import type { ShortcutWithEmail, Shortcut } from '../types'
 
 export default async function editShortcut ({
 	id,
+	email,
 	oldLink,
 	title,
 	description
-}: Shortcut): Promise<Shortcut | undefined> {
+}: ShortcutWithEmail): Promise<Shortcut | undefined> {
 	try {
 		const res = await fetch(`${import.meta.env.PUBLIC_API_URL}/edit-shortcut`, {
 			method: 'POST',
@@ -14,6 +15,7 @@ export default async function editShortcut ({
 			},
 			body: JSON.stringify({
 				id,
+				email,
 				oldLink,
 				title,
 				description
