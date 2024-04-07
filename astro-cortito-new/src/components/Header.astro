@@ -1,19 +1,27 @@
 ---
+import HomeIcon from '../components/svg/HomeIcon.astro'
 import { getSession } from 'auth-astro/server'
 const session = await getSession(Astro.request)
 ---
 
-<header class='flex h-[12vh] w-screen min-w-[350px] items-center justify-end px-6'>
+<header class='flex h-[12vh] min-h-16 w-screen min-w-[350px] items-center px-6'>
 	{
 		session && Astro.url.pathname !== '/' && (
-			<div class='flex items-center gap-5'>
-				<h2 class='mt-2 text-white opacity-90'>{session?.user?.name}</h2>
-				<img
-					class='w-14 rounded-full'
-					src={session?.user?.image}
-					alt={`${session?.user?.name} image`}
-				/>
-			</div>
+			<nav class='flex justify-between items-center w-full'>
+				<a href='/' class='text-2xl font-bold text-white opacity-85 p-4 hover:opacity-100'>
+					<HomeIcon className='w-12' />
+				</a>
+				<div class='flex items-center gap-5 cursor-pointer'>
+					<h2 class='mt-2 text-white opacity-90 md:block hidden'>{session?.user?.name}</h2>
+					<img
+						id='user-image'
+						class='w-14 rounded-full'
+						src={session?.user?.image}
+						alt={`${session?.user?.name} image`}
+					/>
+				</div>
+			</nav>
 		)
 	}
 </header>
+<script></script>
