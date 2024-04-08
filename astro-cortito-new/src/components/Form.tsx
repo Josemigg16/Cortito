@@ -88,6 +88,7 @@ export default function Form ({ className, email }: Props) {
 								Copy
 								</button>
 								<button
+									type='button'
 									onClick={async () => {
 										await navigator.share({
 											title: 'Shortcut cortito!',

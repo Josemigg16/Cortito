@@ -112,7 +112,9 @@ export default function DashboardForm ({ email }: Props) {
 											maxLength={100}
 										/>
 										<input
-											className={`my-1 py-3 pl-3 rounded outline-none hover:bg-slate-300 transition-colors ${error ? 'bg-red-100' : ''}`}
+											className={`my-1 py-3 pl-3 rounded outline-none hover:bg-slate-300 transition-colors ${
+												error ? 'bg-red-100' : ''
+											}`}
 											type='text'
 											value={oldLink}
 											placeholder='Old link'
@@ -124,6 +126,13 @@ export default function DashboardForm ({ email }: Props) {
 								<div className='flex gap-1 my-1 text-white md:gap-2'>
 									<button
 										type='button'
+										onClick={async () => {
+											await navigator.share({
+												title,
+												text: description,
+												url: newLink
+											})
+										}}
 										className='bg-slate-800 w-full text-center p-2 text-xl rounded hover:bg-slate-700 transition-colors'
 									>
 									Share
