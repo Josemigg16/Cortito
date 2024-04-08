@@ -77,7 +77,7 @@ export default function DashboardForm ({ email }: Props) {
 						<>
 							{created
 								? (
-									<div className='bg-slate-800 h-full rounded px-4'>
+									<div className='bg-slate-800 h-full rounded px-4 mb-1'>
 										<p className='text-white text-xl my-2 '>
 											<strong>Title: </strong>
 											{title}
