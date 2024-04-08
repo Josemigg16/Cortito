@@ -157,7 +157,7 @@ export default function DashboardForm ({ email }: Props) {
 					!loadingShortcut ? 'hover:bg-slate-700' : ''
 				}`}
 			>
-				{created ? 'Cerrar' : !isEditing ? 'Create shortcut' : 'Confirm'}
+				{created ? 'Close' : !isEditing ? 'Create shortcut' : 'Confirm'}
 			</button>
 			{isEditing && (
 				<button
