@@ -1,6 +1,7 @@
 import { type FormEvent, useState } from 'react'
 import { useError } from '../hooks/useError'
 import { makeURL } from '../helpers/makeURL'
+import { copy } from '../stores/copiedStore'
 import Loading from './svg/Loading'
 import Share from './svg/Share'
 import Copy from './svg/Copy'
@@ -50,7 +51,9 @@ export default function Form ({ className, email }: Props) {
 									{error && <Error />}
 									<input
 										id='link-input'
-										className={`block w-full rounded-lg px-3 py-2 shadow-xl outline-none ${error ? 'border-2 border-red-600' : ''}`}
+										className={`block w-full rounded-lg px-3 py-2 shadow-xl outline-none ${
+											error ? 'border-2 border-red-600' : ''
+										}`}
 										placeholder='Enter your link'
 										type='text'
 										value={link}
@@ -73,11 +76,27 @@ export default function Form ({ className, email }: Props) {
 								<p className='overflow-hidden text-ellipsis'>{shortcut}</p>
 							</a>
 							<footer className='flex gap-2'>
-								<button className='relative block h-8 w-full rounded-xl bg-gray-700 bg-opacity-40 text-white transition-colors hover:bg-gray-600'>
+								<button
+									type='button'
+									onClick={async () => {
+										await navigator.clipboard.writeText(shortcut)
+										copy()
+									}}
+									className='relative block h-8 w-full rounded-xl bg-gray-700 bg-opacity-40 text-white transition-colors hover:bg-gray-600'
+								>
 									<Copy className='absolute left-2 top-2 w-4' />
 								Copy
 								</button>
-								<button className='relative block h-8 w-full rounded-xl bg-gray-700 bg-opacity-40 text-white transition-colors hover:bg-gray-600'>
+								<button
+									onClick={async () => {
+										await navigator.share({
+											title: 'Shortcut cortito!',
+											text: 'Look at my shortcut!',
+											url: shortcut
+										})
+									}}
+									className='relative block h-8 w-full rounded-xl bg-gray-700 bg-opacity-40 text-white transition-colors hover:bg-gray-600'
+								>
 									<Share className='absolute left-2 top-2 w-4' />
 								Share
 								</button>

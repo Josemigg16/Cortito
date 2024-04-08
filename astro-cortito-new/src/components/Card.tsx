@@ -16,7 +16,7 @@ function Card ({ shortcut }: ShortcutAsProp) {
 			</p>
 			<p
 				className='description text-md min-h-24 overflow-hidden
-            pl-2 text-gray-200 outline-none xt w-full'
+            px-2 text-gray-200 outline-none xt w-full break-all'
 			>
 				{shortcut.description}
 			</p>

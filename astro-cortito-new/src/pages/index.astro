@@ -6,11 +6,13 @@ import WriteDel from '../components/WriteDel.astro'
 import SessionButton from '../components/SessionButton.astro'
 import { getSession } from 'auth-astro/server'
 import registerLogin from '../libs/registerLogin'
+import Copy from '../components/Copy.astro'
 const session = await getSession(Astro.request)
 await registerLogin({ name: session?.user?.name, email: session?.user?.email })
 ---
 
 <Layout title='Home'>
+	<Copy />
 	<article
 		class='relative mx-auto mb-36 flex h-[450px] min-h-fit w-[262px] min-w-[218px] flex-col items-center justify-around rounded-3xl bg-slate-950 bg-opacity-20 p-8 pt-10 md:w-fit md:px-16'
 	>

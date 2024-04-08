@@ -51,7 +51,7 @@ export default function DashboardForm ({ email }: Props) {
 	return (
 		<form
 			id='dashboard-form'
-			className='w-[292px] min-w-[218px] bg-slate-900 md:w-[400px] flex flex-col p-8 md:p-10 rounded-xl relative overflow-auto'
+			className='w-[292px] min-w-[218px] bg-slate-900 md:w-[400px] flex flex-col p-8 rounded-xl relative overflow-auto'
 			onSubmit={handleSubmit}
 		>
 			<span
@@ -77,22 +77,22 @@ export default function DashboardForm ({ email }: Props) {
 						<>
 							{created
 								? (
-									<>
-										<p className='text-white text-xl my-2'>
+									<div className='bg-slate-800 h-full rounded px-4'>
+										<p className='text-white text-xl my-2 '>
 											<strong>Title: </strong>
 											{title}
 										</p>
-										<p className='text-white text-xl'>
+										<p className='text-white text-xl h-44 break-all overflow-hidden'>
 											<strong>
 										Description: <br />{' '}
 											</strong>
 											{description}
 										</p>
-										<p className='text-white text-xl text-ellipsis overflow-hidden text-nowrap mt-auto mb-2'>
+										<p className='text-white text-xl text-ellipsis overflow-hidden text-nowrap'>
 											<strong>link: </strong>
 											{oldLink}
 										</p>
-									</>
+									</div>
 								)
 								: (
 									<div className='w-full flex flex-col'>
@@ -109,7 +109,7 @@ export default function DashboardForm ({ email }: Props) {
 											placeholder='Description'
 											value={description}
 											onChange={(e) => setDescription(e.target.value)}
-											maxLength={160}
+											maxLength={100}
 										/>
 										<input
 											className={`my-1 py-3 pl-3 rounded outline-none hover:bg-slate-300 transition-colors ${error ? 'bg-red-100' : ''}`}

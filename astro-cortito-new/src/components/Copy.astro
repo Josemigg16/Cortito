@@ -1,0 +1,37 @@
+<span
+	id='copied'
+	class='absolute -bottom-10 left-3 bg-green-500 px-3 py-2 text-white font-bold rounded'
+>
+	Copied!
+</span>
+<style>
+	.copied-fadeIn {
+		animation: fullFadeIn 2s;
+	}
+
+	@keyframes fullFadeIn {
+		0% {
+			@apply -bottom-10;
+		}
+		20% {
+			@apply bottom-3;
+		}
+		80% {
+			@apply bottom-3;
+		}
+		100% {
+			@apply -bottom-10;
+		}
+	}
+</style>
+<script>
+	import { copiedStore } from '../stores/copiedStore'
+	const $copied = document.querySelector('#copied') as HTMLSpanElement
+	copiedStore.subscribe((active) => {
+		if (active) {
+			$copied.classList.add('copied-fadeIn')
+		} else {
+			$copied.classList.remove('copied-fadeIn')
+		}
+	})
+</script>
